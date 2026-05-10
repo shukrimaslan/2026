@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SW5W1VDKH7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SW5W1VDKH7');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works — rockstr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4;--bg2:#f2ede3;--bg3:#eae3d6;--surface:#fff;
+--bga:       rgb(254, 199, 111,.09);
+  --ink:#1a1410;--ink2:#574a38;--ink3:#9a8e7d;
+  --border:rgba(26,20,16,.08);--border-h:rgba(26,20,16,.22);
+  --shadow:0 4px 20px rgba(26,20,16,.07);--shadow-lg:0 24px 64px rgba(26,20,16,.13);
+  --accent:#ff4d1c;--a-bg:rgba(255,77,28,.07);
+  --accent2:#ffbe0b;--accent3:#06d6a0;--accent4:#a78bfa;
+  --fs:'Space Grotesk',sans-serif;--fd:'Syne',sans-serif;--fm:'DM Mono',monospace;
+  --sp:cubic-bezier(.16,1,.3,1);--tt:background .5s var(--sp),color .4s,border-color .4s;
+}
+[data-theme="dark"]{
+  --bg:#0c0b08;--bg2:#141210;--bg3:#1c1916;--surface:#1e1b17;
+  --ink:#f5f0e8;--ink2:rgba(245,240,232,.62);--ink3:rgba(245,240,232,.32);
+  --border:rgba(245,240,232,.07);--border-h:rgba(245,240,232,.22);
+  --shadow:0 4px 20px rgba(0,0,0,.3);--shadow-lg:0 24px 64px rgba(0,0,0,.55);
+  --a-bg:rgba(255,77,28,.1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fs);overflow-x:hidden;cursor:none;transition:var(--tt)}
+
+/* ── CURSOR ─────────────────────────────── */
+#cur,#cr{position:fixed;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%)}
+#cur{width:10px;height:10px;background:var(--accent);z-index:9999;transition:width .2s var(--sp),height .2s var(--sp),background .2s}
+#cr{width:38px;height:38px;border:1.5px solid var(--accent);z-index:9998;opacity:.38;transition:width .38s var(--sp),height .38s var(--sp),opacity .2s}
+body.hov #cur{width:20px;height:20px;background:var(--accent2)}
+body.hov #cr{width:66px;height:66px;opacity:.2;border-color:var(--accent2)}
+body.clk #cur{width:5px;height:5px}
+
+/* ── SPOTLIGHT ──────────────────────────── */
+#spot{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle 420px at var(--sx,50%) var(--sy,50%),rgba(255,77,28,.05) 0%,transparent 70%)}
+[data-theme="dark"] #spot{background:radial-gradient(circle 420px at var(--sx,50%) var(--sy,50%),rgba(255,77,28,.08) 0%,transparent 70%)}
+
+/* ─────────────────────────────────────────
+   THEME TOGGLE
+───────────────────────────────────────── */
+#tog {
+  position:fixed; top:20px; right:20px; z-index:2001;
+  width:54px; height:28px; border-radius:100px;
+  background:var(--surface); border:1px solid var(--border-h);
+  display:flex; align-items:center; padding:3px; cursor:pointer;
+  box-shadow:var(--shadow); transition:background .4s, border-color .4s;
+}
+.tog-t {
+  width:20px; height:20px; border-radius:50%; background:var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; flex-shrink:0; transition:transform .4s var(--sp);
+}
+[data-theme="dark"] .tog-t { transform:translateX(25px); }
+
+
+
+/* ── BACKGROUND DOODLES (parallax layer) ── */
+#bg-doodles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bd{position:absolute;opacity:0;transition:opacity 1s var(--sp)}
+.bd.show{opacity:1}
+.bd svg{display:block}
+
+/* individual idle animations */
+.bd-star{animation:bspin 14s linear infinite}
+.bd-zig{animation:bwob 5s ease-in-out infinite}
+.bd-circ{animation:bpulse 4s ease-in-out infinite}
+.bd-plus{animation:bspin 20s linear infinite reverse}
+.bd-wave{animation:bwob 6s ease-in-out infinite 1s}
+.bd-dots{animation:bpulse 7s ease-in-out infinite .5s}
+.bd-arc{animation:bwob 8s ease-in-out infinite 2s}
+.bd-star2{animation:bspin 18s linear infinite .3s}
+.bd-circ2{animation:bpulse 5s ease-in-out infinite 1.5s}
+
+@keyframes bspin{to{transform:rotate(360deg)}}
+@keyframes bwob{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-10px) rotate(3deg)}66%{transform:translateY(7px) rotate(-2deg)}}
+@keyframes bpulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.25);opacity:1}}
+
+/* ── NAV ────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
+nav.sc{background:rgba(250,248,244,.9);backdrop-filter:blur(18px);box-shadow:0 1px 0 var(--border)}
+[data-theme="dark"] nav.sc{background:rgba(12,11,8,.9)}
+.nl{font-family:var(--fs);font-size:22px;font-weight:800;letter-spacing:-.04em;color:var(--ink);text-decoration:none}
+.nl b{color:var(--accent)}
+.nv{display:flex;gap:34px;list-style:none;align-items:center}
+.nv a{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color .2s;position:relative}
+.nv a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--accent);transition:width .35s var(--sp)}
+.nv a:hover{color:var(--ink)}.nv a:hover::after,.nv a.on::after{width:100%}
+.nv a.on{color:var(--ink)}
+.ncta{background:var(--accent)!important;color:#fff!important;padding:8px 18px!important;border-radius:100px}
+.ncta::after{display:none!important}.ncta:hover{opacity:.85}
+
+/* ─────────────────────────────────────────
+   MOBILE BURGER
+───────────────────────────────────────── */
+#burger {
+  display:none; flex-direction:column; justify-content:center; align-items:center;
+  width:40px; height:40px; gap:5px; background:none; border:none; cursor:pointer; z-index:2200; padding:4px;
+}
+.bl { display:block; width:22px; height:2px; border-radius:2px; background:var(--ink); transform-origin:center; transition:transform .4s var(--sp), opacity .3s, width .3s var(--sp); }
+body.mopen #burger .bl:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+body.mopen #burger .bl:nth-child(2) { opacity:0; width:0; }
+body.mopen #burger .bl:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* mobile menu overlay */
+#mob {
+  position:fixed; inset:0; z-index:2100;
+  background:var(--bg);
+  /* flex column: top-bar | scrollable content */
+  display:flex; flex-direction:column;
+  transform:translateX(100%);
+  padding: 25px 32px 48px;
+  transition:transform .55s var(--sp), background .5s;
+  overflow:hidden; /* clip the slide */
+}
+body.mopen #mob { transform:translateX(0); }
+/* accent top bar */
+#mob::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--accent); z-index:1; }
+#mob::after {
+  content:'works'; position:absolute; right:-10px; bottom:-20px;
+  font-family:var(--fd); font-size:clamp(80px,20vw,160px); font-weight:800;
+  letter-spacing:-.06em; color:transparent;
+  -webkit-text-stroke:1.5px var(--border-h);
+  pointer-events:none; user-select:none; line-height:1;
+}
+	
+/* ── menu top bar: logo + close btn ── */
+.mob-topbar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 28px 0; flex-shrink:0; position:relative; z-index:2;
+}
+.mob-logo { font-family:var(--fs); font-size:22px; font-weight:800; letter-spacing:-.04em; color:var(--ink); text-decoration:none; }
+.mob-logo b { color:var(--accent); }
+	
+/* close button — replaces the animated burger X */
+.mob-close {
+  width:40px; height:40px; border-radius:50%;
+  border:1.5px solid var(--border-h); background:transparent;
+  cursor:pointer; color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; line-height:1;
+  transition:background .2s, border-color .2s, transform .3s var(--sp);
+}
+.mob-close:hover { background:var(--a-bg); border-color:var(--accent); color:var(--accent); transform:rotate(90deg); }
+
+/* nav links */
+.mob-links { display:flex; flex-direction:column; gap:4px; flex:1; align-items: normal; }
+.mob-link {
+  font-family:var(--fd); font-size:clamp(28px,8vw,44px); font-weight:800; letter-spacing:-.04em;
+  color:var(--ink); text-decoration:none; padding:10px 0; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  opacity:0; transform:translateX(32px);
+  transition:opacity .48s var(--sp), transform .48s var(--sp), color .2s, padding-left .2s var(--sp);
+}
+body.mopen .mob-link { opacity:1; transform:translateX(0); }
+body.mopen .mob-link:nth-child(1) { transition-delay:.06s; margin-top: 45%; border-top:1px solid var(--border);}
+body.mopen .mob-link:nth-child(2) { transition-delay:.12s; }
+body.mopen .mob-link:nth-child(3) { transition-delay:.18s; }
+body.mopen .mob-link:nth-child(4) { transition-delay:.24s; }
+body.mopen .mob-link:nth-child(5) { transition-delay:.30s; }
+.mob-link:hover { color:var(--accent); padding-left:8px; }
+.mob-arrow { font-size:18px; opacity:.28; transition:opacity .2s, transform .2s var(--sp); }
+.mob-link:hover .mob-arrow { opacity:1; transform:translateX(4px); }
+
+/* social + availability — below links, never overlap */
+.mob-footer { margin-top:24px; position:relative; z-index:1; }
+.mob-social {
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; margin-bottom:16px;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .5s var(--sp) .34s, transform .5s var(--sp) .34s; z-index: 2002;
+}
+body.mopen .mob-social { opacity:1; transform:translateY(0); }
+.mob-sp {
+  font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  padding:7px 13px; border-radius:100px; border:1px solid var(--border-h);
+  color:var(--ink2); text-decoration:none; transition:border-color .2s, color .2s;
+}
+.mob-sp:hover { border-color:var(--accent); color:var(--accent); }
+.mob-avail { font-family:var(--fm); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); margin-top:18px; display:flex; align-items:center; gap:7px; }
+.mob-avail-dot { width:7px; height:7px; border-radius:50%; background:var(--accent3); animation:pd 2s ease-in-out infinite; }
+
+/* ── PAGE HEADER ────────────────────────── */
+#ph{padding:140px 48px 60px;position:relative;overflow:hidden}
+.phw{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.ph-ey{font-family:var(--fm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:10px;opacity:0;animation:fu .8s var(--sp) .1s forwards}
+.ph-ey::before{content:'';display:block;width:26px;height:1px;background:var(--accent)}
+.ph-t{font-family:var(--fs);font-size:clamp(64px,10vw,128px);font-weight:800;letter-spacing:-.05em;line-height:.88;color:var(--ink);margin-bottom:32px}
+.pw{display:inline-block;overflow:hidden}
+.pwi{display:inline-block;transform:translateY(110%);animation:su .9s var(--sp) forwards}
+.w1 .pwi{animation-delay:.2s}.w2 .pwi{animation-delay:.32s;color:var(--accent)}
+.ph-meta{display:flex;align-items:center;gap:24px;opacity:0;animation:fu .8s var(--sp) .5s forwards}
+.ph-ct{font-family:var(--fm);font-size:13px;color:var(--ink3);letter-spacing:.08em}
+.ph-ln{width:1px;height:20px;background:var(--border-h)}
+.ph-ds{font-size:16px;color:var(--ink2);max-width:520px;line-height:1.6}
+.ph-bg{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--fd);font-size:clamp(180px,22vw,320px);font-weight:800;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--border-h);pointer-events:none;user-select:none;opacity:0;animation:fu 1.2s var(--sp) .3s forwards;z-index:1}
+
+/* ── FILTER TABS ────────────────────────── */
+#filters{padding:0 48px 0;position:sticky;top:68px;z-index:500;background:var(--bg);transition:var(--tt);box-shadow:0 1px 0 var(--border)}
+.fi{max-width:1200px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;padding:16px 0}
+.fp{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:8px 18px;border-radius:100px;border:1px solid var(--border-h);color:var(--ink2);cursor:pointer;background:transparent;transition:background .25s,color .25s,border-color .25s,transform .2s var(--sp);white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.fp:hover{border-color:var(--ink2);color:var(--ink);transform:translateY(-2px)}
+.fp.on{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-2px)}
+.fc{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:100px;font-size:9px;padding:0 4px;background:rgba(255,255,255,.25)}
+.fp:not(.on) .fc{background:var(--border-h);color:var(--ink3)}
+
+/* ── GRID ───────────────────────────────── */
+#gw{padding:40px 48px 80px;position:relative;z-index:2}
+.grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:16px;position:relative}
+
+/* ── PROJECT CARDS ──────────────────────── */
+.pc{
+  border-radius:20px;overflow:hidden;position:relative;
+  text-decoration:none;display:block;background:var(--bg3);
+  box-shadow:var(--shadow);will-change:transform;
+  transition:box-shadow .3s,opacity .45s var(--sp),transform .45s var(--sp);
+}
+.pc.out{opacity:0.5!important;transform:scale(.93)!important;pointer-events:none}
+.pc:hover{box-shadow:var(--shadow-lg)}
+.pc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--sp),filter .4s}
+.pc:hover img{transform:scale(1.07);filter:grayscale(80%) contrast(1.08)}
+.pco{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.pc:hover .pco{background:rgba(255,77,28,.78)}
+.pci{transform:translateY(16px);opacity:0;transition:all .4s var(--sp)}
+.pc:hover .pci{transform:translateY(0);opacity:1}
+.pcc{font-family:var(--fm);font-size:10px;color:rgba(255,255,255,.65);letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px}
+.pct{font-family:var(--fd);font-size:22px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em}
+.pcy{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;letter-spacing:.1em}
+.ab{position:absolute;top:14px;right:14px;background:var(--accent2);color:#1a1410;font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px;z-index:2}
+.nb{position:absolute;top:14px;left:14px;background:var(--accent);color:#fff;font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px;z-index:2}
+
+/* grid spans */
+.sf{grid-column:span 12;aspect-ratio:21/8}
+.sh{grid-column:span 6;aspect-ratio:4/3}
+.st{grid-column:span 4;aspect-ratio:4/3}
+.s23{grid-column:span 8;aspect-ratio:16/9}
+.s13{grid-column:span 4;aspect-ratio:3/3.44}
+
+/* empty state */
+#empty{display:none;text-align:center;padding:80px;grid-column:span 12}
+#empty.show{display:block}
+.ei{font-size:40px;margin-bottom:14px;opacity:.25}
+.et{font-family:var(--fd);font-size:24px;font-weight:700;color:var(--ink3);letter-spacing:-.02em}
+
+/* ── TICKER ─────────────────────────────── */
+.tick{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;background:var(--bg2);transition:var(--tt)}
+.tt3{display:flex;animation:tm 28s linear infinite;white-space:nowrap}
+.ti{font-family:var(--fd);font-size:12px;font-weight:600;letter-spacing:.02em;padding:0 30px;color:var(--ink2);display:flex;align-items:center;gap:8px}
+.ti b{color:var(--accent)}
+.ts{width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.4;flex-shrink:0}
+
+/* ── FOOTER ─────────────────────────────── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;transition:var(--tt)}
+.fc2{font-family:var(--fm);font-size:11px;color:var(--ink3);letter-spacing:.05em}
+.ft{font-family:var(--fd);font-size:13px;color:var(--ink3);margin-top:3px}
+.fn{display:flex;gap:20px}
+.fn a{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color .2s}
+.fn a:hover{color:var(--accent)}
+
+/* ── SCROLL REVEAL ──────────────────────── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s var(--sp),transform .7s var(--sp)}
+.rv.in{opacity:1;transform:none}
+
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes su{from{transform:translateY(110%)}to{transform:translateY(0)}}
+@keyframes tm{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/*@media(max-width:900px){
+  nav{padding:16px 20px}
+  #burger { display:flex; }
+  #tog { right:72px; position: absolute;}
+  .nv li:not(:last-child){display:none}
+  #ph,#filters,#gw,footer{padding-left:24px;padding-right:24px}
+  .sf,.sh,.s23,.s13,.st{grid-column:span 12;aspect-ratio:16/9}
+  #bg-doodles{display:none}
+}*/
+@media(max-width:900px) {
+  #burger { display:flex; }
+  nav { padding:16px 20px; position: inherit; top: unset;  }
+  #tog { right:72px; position: absolute; margin-top: 2px;}
+  .nv li:not(:last-child){display:none;}
+	#filters { top: 0px; padding-top:10px;}
+	#gw{padding:40px 18px 80px;}
+  .sw { padding:0 24px; }
+  .bio-grid, .sk-grid, .contact-grid { grid-template-columns:1fr; }
+  .frow { grid-template-columns:1fr; }
+  #rnav { display:none; }
+  footer { padding:40px 24px; flex-direction:column; align-items:flex-start; }
+  #bio, #skills, #timeline, #contact { padding:80px 0; }
+}
+</style>
+</head>
+<body>
+<div id="spot"></div>
+<div id="cur"></div>
+<div id="cr"></div>
+
+<!-- ── BACKGROUND DOODLES ───────────────── -->
+<div id="bg-doodles">
+  <!-- star top-left -->
+  <div class="bd bd-star" style="top:8%;left:4%" data-px="0.06">
+    <svg width="44" height="44" viewBox="0 0 44 44"><path d="M22 2 25.5 18.5 42 22 25.5 25.5 22 42 18.5 25.5 2 22 18.5 18.5Z" fill="var(--accent)" opacity=".18"/></svg>
+  </div>
+  <!-- zigzag right -->
+  <div class="bd bd-zig" style="top:22%;right:5%" data-px="0.09">
+    <svg width="60" height="26" viewBox="0 0 60 26"><polyline points="0,22 12,4 24,22 36,4 48,22 60,4" fill="none" stroke="var(--accent2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".25"/></svg>
+  </div>
+  <!-- dashed circle left-mid -->
+  <div class="bd bd-circ" style="top:38%;left:2%" data-px="0.04">
+    <svg width="54" height="54" viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" fill="none" stroke="var(--accent4)" stroke-width="2" stroke-dasharray="7 5" opacity=".2"/></svg>
+  </div>
+  <!-- plus bottom-right -->
+  <div class="bd bd-plus" style="bottom:25%;right:3%" data-px="0.07">
+    <svg width="32" height="32" viewBox="0 0 32 32"><line x1="16" y1="2" x2="16" y2="30" stroke="var(--accent3)" stroke-width="3" stroke-linecap="round" opacity=".22"/><line x1="2" y1="16" x2="30" y2="16" stroke="var(--accent3)" stroke-width="3" stroke-linecap="round" opacity=".22"/></svg>
+  </div>
+  <!-- wave mid-left -->
+  <div class="bd bd-wave" style="top:55%;left:5%" data-px="0.05">
+    <svg width="72" height="24" viewBox="0 0 72 24"><path d="M0 12 C12 2,24 22,36 12 C48 2,60 22,72 12" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" opacity=".18"/></svg>
+  </div>
+  <!-- dot grid top-right -->
+  <div class="bd bd-dots" style="top:12%;right:12%" data-px="0.03">
+    <svg width="56" height="56" viewBox="0 0 56 56"><g fill="var(--ink3)" opacity=".15"><circle cx="8" cy="8" r="2.5"/><circle cx="28" cy="8" r="2.5"/><circle cx="48" cy="8" r="2.5"/><circle cx="8" cy="28" r="2.5"/><circle cx="28" cy="28" r="2.5"/><circle cx="48" cy="28" r="2.5"/><circle cx="8" cy="48" r="2.5"/><circle cx="28" cy="48" r="2.5"/><circle cx="48" cy="48" r="2.5"/></g></svg>
+  </div>
+  <!-- arc bottom-left -->
+  <div class="bd bd-arc" style="bottom:15%;left:8%" data-px="0.04">
+    <svg width="52" height="30" viewBox="0 0 52 30"><path d="M4 26 Q26 2 48 26" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-linecap="round" opacity=".18"/></svg>
+  </div>
+  <!-- second star bottom-center -->
+  <div class="bd bd-star2" style="bottom:8%;left:45%" data-px="0.05">
+    <svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 2 17.5 12.5 28 15 17.5 17.5 15 28 12.5 17.5 2 15 12.5 12.5Z" fill="var(--accent2)" opacity=".2"/></svg>
+  </div>
+  <!-- circle right-lower -->
+  <div class="bd bd-circ2" style="bottom:30%;right:8%" data-px="0.06">
+    <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--accent)" stroke-width="1.5" opacity=".15"/></svg>
+  </div>
+</div>
+
+
+
+<!-- ── NAV ───────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="/2026" class="nl" id="logo">rock<b>str</b></a>
+  <ul class="nv">
+    <li><a href="/2026">Intro</a></li>
+    <li><a href="works.html" class="on">Works</a></li>
+    <li><a href="about.html">About</a></li>
+	<li><a href="leadership.html">Leadership</a></li>
+    <li><a href="social.html">Social</a></li>
+    <li><a href="about.html#contact" class="ncta">Let's Talk</a></li>
+    <li><button id="tog" title="Toggle theme" aria-label="Toggle theme">
+    		<div class="tog-t" id="togt">🌞</div>
+    	</button>
+    </li>
+  </ul>
+  <button id="burger" aria-label="Open menu">
+    <span class="bl"></span><span class="bl"></span><span class="bl"></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ────────────────────────────────────── -->
+<div id="mob">
+  <a href="/2026" class="mob-logo">rock<b>str</b></a>
+  <nav class="mob-links">
+    <a href="/2026" class="mob-link">Intro <span class="mob-arrow">→</span></a>
+    <a href="works.html"     class="mob-link" style="color:var(--accent)">Works <span class="mob-arrow" style="opacity:.6">→</span></a>
+    <a href="about.html"     class="mob-link">About <span class="mob-arrow">→</span></a>
+	<a href="leadership.html"     class="mob-link">Leadership <span class="mob-arrow">→</span></a>
+    <a href="social.html" class="mob-link">Social <span class="mob-arrow">→</span></a>
+    <a href="about.html#contact" class="mob-link" id="mob-talk">Let's Talk <span class="mob-arrow">→</span></a>
+  </nav>
+  <div class="mob-social">
+    <a href="https://www.tiktok.com/@dodobidodo" target="_blank" class="mob-sp">TikTok</a>
+    <a href="https://instagram.com/workbyshuks"  target="_blank" class="mob-sp">Instagram</a>
+    <a href="https://linkedin.com/in/shuks"      target="_blank" class="mob-sp">LinkedIn</a>
+    <a href="http://youtube.com/@littlel0ft"     target="_blank" class="mob-sp">YouTube</a>
+    <a href="https://be.net/shuks"               target="_blank" class="mob-sp">Behance</a>
+    <a href="https://dribbble.com/rockstr"       target="_blank" class="mob-sp">Dribbble</a>
+  </div>
+  <div class="mob-avail"><span class="mob-avail-dot"></span>Available for new projects</div>
+</div>
+
+<!-- PAGE HEADER -->
+<section id="ph">
+  <div class="ph-bg">23</div>
+  <div class="phw">
+    <div class="ph-ey">Portfolio — Selected Works</div>
+    <h1 class="ph-t">
+      <span class="pw w1"><span class="pwi">Selected</span></span>&nbsp;
+      <span class="pw w2"><span class="pwi">Works.</span></span>
+    </h1>
+    <div class="ph-meta">
+      <span class="ph-ct" id="vis-count">23 projects</span>
+      <div class="ph-ln"></div>
+      <span class="ph-ds">15+ years of digital products, branding, UI/UX &amp; motion.</span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="tick">
+  <div class="tt3">
+    <div class="ti"><b>UI/UX</b><div class="ts"></div></div><div class="ti"><b>Creative Direction</b><div class="ts"></div></div>
+    <div class="ti"><b>Motion Design</b><div class="ts"></div></div><div class="ti"><b>Brand Identity</b><div class="ts"></div></div>
+    <div class="ti"><b>Illustration</b><div class="ts"></div></div><div class="ti"><b>AR / SparkAR</b><div class="ts"></div></div>
+    <div class="ti"><b>Social Media</b><div class="ts"></div></div><div class="ti"><b>AI Workflows</b><div class="ts"></div></div>
+    <div class="ti"><b>UI/UX</b><div class="ts"></div></div><div class="ti"><b>Creative Direction</b><div class="ts"></div></div>
+    <div class="ti"><b>Motion Design</b><div class="ts"></div></div><div class="ti"><b>Brand Identity</b><div class="ts"></div></div>
+    <div class="ti"><b>Illustration</b><div class="ts"></div></div><div class="ti"><b>AR / SparkAR</b><div class="ts"></div></div>
+    <div class="ti"><b>Social Media</b><div class="ts"></div></div><div class="ti"><b>AI Workflows</b><div class="ts"></div></div>
+  </div>
+</div>
+
+<!-- FILTER TABS -->
+<div id="filters">
+  <div class="fi">
+    <button class="fp on" data-f="all">All <span class="fc" id="cnt-all">23</span></button>
+    <button class="fp" data-f="uiux">UI/UX <span class="fc" id="cnt-uiux"></span></button>
+    <button class="fp" data-f="creative">Creative Direction <span class="fc" id="cnt-creative"></span></button>
+    <button class="fp" data-f="motion">Motion <span class="fc" id="cnt-motion"></span></button>
+    <button class="fp" data-f="illustration">Illustration <span class="fc" id="cnt-illustration"></span></button>
+    <button class="fp" data-f="social">Social Media <span class="fc" id="cnt-social"></span></button>
+    <button class="fp" data-f="award">Award Winning <span class="fc" id="cnt-award"></span></button>
+    <button class="fp" data-f="latest">Latest <span class="fc" id="cnt-latest"></span></button>
+  </div>
+</div>
+
+<!-- WORKS GRID -->
+<section id="gw">
+  <div class="grid" id="grid">
+
+    <a href="https://rockstr.net/2022/04/20/syok-universe/" target="_blank" class="pc sf rv"
+       data-cats="uiux creative award"
+       data-title="SYOK Universe" data-cat-label="UI/UX · Creative Direction · Brand" data-year="2022–2023">
+      <img src="https://rockstr.net/wp-content/uploads/2022/04/SYOK-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">UI/UX · Creative Direction · Brand</div><div class="pct">SYOK Universe</div><div class="pcy">2022–2023</div></div></div>
+      <div class="ab">Award Winning 🏆</div>
+    </a>
+
+    <a href="https://rockstr.net/2012/12/07/hitzfm-webby-website/" target="_blank" class="pc s23 rv"
+       data-cats="uiux creative award"
+       data-title="hitz.fm Responsive Site" data-cat-label="UI/UX · Responsive Design" data-year="2012">
+      <img src="https://rockstr.net/wp-content/uploads/2012/12/hitz2012-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">UI/UX · Responsive Design</div><div class="pct">hitz.fm Responsive Site</div><div class="pcy">2012</div></div></div>
+      <div class="ab">Webby Award 🏆</div>
+    </a>
+
+    <a href="https://rockstr.net/2006/11/06/ccc/" target="_blank" class="pc s13 rv"
+       data-cats="creative award"
+       data-title="Capital Corporate Comms" data-cat-label="Creative Direction · Web" data-year="2006">
+      <img src="https://rockstr.net/wp-content/uploads/2019/05/ccc-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Creative Direction · Web</div><div class="pct">Capital Corporate Comms</div><div class="pcy">2006</div></div></div>
+      <div class="ab">NY Festivals 🥉</div>
+    </a>
+
+    <a href="https://rockstr.net/2018/01/22/astro-radio-streaming-mobile-app/" target="_blank" class="pc st rv"
+       data-cats="uiux creative"
+       data-title="Astro Radio Streaming App" data-cat-label="UI/UX · Mobile App" data-year="2018">
+      <img src="https://rockstr.net/wp-content/uploads/2018/01/ARapps-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">UI/UX · Mobile App</div><div class="pct">Astro Radio Streaming App</div><div class="pcy">2018</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2015/11/01/hitzfm-website-2015/" target="_blank" class="pc st rv"
+       data-cats="uiux creative"
+       data-title="hitz.fm Website Facelift" data-cat-label="UI/UX · Web Design" data-year="2015">
+      <img src="https://rockstr.net/wp-content/uploads/2023/08/hitz2015-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">UI/UX · Web Design</div><div class="pct">hitz.fm Website Facelift</div><div class="pcy">2015</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2015/08/18/astro-radio-corporate-website/" target="_blank" class="pc st rv"
+       data-cats="uiux creative"
+       data-title="Astro Radio Corporate Site" data-cat-label="UI/UX · Corporate Web" data-year="2015">
+      <img src="https://rockstr.net/wp-content/uploads/2022/01/cover-astroradio.jpg" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">UI/UX · Corporate Web</div><div class="pct">Astro Radio Corporate Site</div><div class="pcy">2015</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2006/08/08/ayesha-harben/" target="_blank" class="pc s13 rv"
+       data-cats="creative uiux"
+       data-title="Ayesha Harben Website" data-cat-label="Creative Direction · Web" data-year="2006">
+      <img src="https://rockstr.net/wp-content/uploads/2019/05/AH-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Creative Direction · Web</div><div class="pct">Ayesha Harben Website</div><div class="pcy">2006</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2019/05/17/instagram-filters-sparkar/" target="_blank" class="pc s23 rv"
+       data-cats="creative illustration"
+       data-title="Instagram Filters with SparkAR" data-cat-label="AR · Illustration · SparkAR" data-year="2019">
+      <img src="https://rockstr.net/wp-content/uploads/2019/05/IGfilters-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">AR · Illustration · SparkAR</div><div class="pct">Instagram Filters with SparkAR</div><div class="pcy">2019</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2015/10/13/astro-superheroes-squad/" target="_blank" class="pc st rv"
+       data-cats="illustration creative"
+       data-title="Astro Superheroes Squad" data-cat-label="Illustration · Creative" data-year="2015">
+      <img src="https://rockstr.net/wp-content/uploads/2015/10/theass-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Illustration · Creative</div><div class="pct">Astro Superheroes Squad</div><div class="pcy">2015</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2015/06/02/kacang-tv/" target="_blank" class="pc st rv"
+       data-cats="illustration creative motion"
+       data-title="Kacang" data-cat-label="Illustration · Motion · TV" data-year="2015">
+      <img src="https://rockstr.net/wp-content/uploads/2015/06/kacang-title.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Illustration · Motion · TV</div><div class="pct">Kacang</div><div class="pcy">2015</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2014/03/31/hitzfm-website-2013/" target="_blank" class="pc st rv"
+       data-cats="uiux creative"
+       data-title="hitz.fm Website 2013" data-cat-label="UI/UX · Web Design" data-year="2013">
+      <img src="https://rockstr.net/wp-content/uploads/2023/08/hitz2013-cover.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">UI/UX · Web Design</div><div class="pct">hitz.fm Website 2013</div><div class="pcy">2013</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2025/06/04/ai-as-a-tool-well-for-now/" target="_blank" class="pc sf rv"
+       data-cats="latest creative"
+       data-title="AI as a Tool — Well, for Now" data-cat-label="AI · Creative Direction · Article" data-year="2025">
+      <img src="https://rockstr.net/wp-content/uploads/2025/06/rockstr-AI.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">AI · Creative Direction · Article</div><div class="pct">AI as a Tool — Well, for Now</div><div class="pcy">2025</div></div></div>
+      <div class="nb">Latest ✦</div>
+    </a>
+
+    <a href="https://rockstr.net/2025/04/25/social-media-head/" target="_blank" class="pc sh rv"
+       data-cats="latest social creative"
+       data-title="Head of Social Media" data-cat-label="Social Media · Direction" data-year="2025">
+      <img src="https://rockstr.net/wp-content/uploads/2025/04/JFP-YT.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Social Media · Direction</div><div class="pct">Head of Social Media</div><div class="pcy">2025</div></div></div>
+      <div class="nb">Latest ✦</div>
+    </a>
+
+    <a href="https://rockstr.net/2023/12/01/motion-design-animations/" target="_blank" class="pc sh rv"
+       data-cats="latest motion creative"
+       data-title="Motion Design, Videos & Animations" data-cat-label="Motion Design · Animation" data-year="2023">
+      <img src="https://rockstr.net/wp-content/uploads/2024/02/motion-tb.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Motion Design · Animation</div><div class="pct">Motion Design &amp; Animations</div><div class="pcy">2023</div></div></div>
+    </a>
+
+    <a href="https://rockstr.net/2023/09/08/syok-podcast/" target="_blank" class="pc s23 rv"
+       data-cats="latest creative social"
+       data-title="SYOK Podcast" data-cat-label="Creative Direction · Social · Brand" data-year="2023">
+      <img src="https://rockstr.net/wp-content/uploads/2023/11/Podcast-past_present.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Creative Direction · Social · Brand</div><div class="pct">SYOK Podcast</div><div class="pcy">2023</div></div></div>
+    </a>
+
+    <a href="https://dribbble.com/rockstr" target="_blank" class="pc s13 rv"
+       data-cats="creative illustration"
+       data-title="Personal Illustration" data-cat-label="Personal · Illustration" data-year="Ongoing">
+      <img src="https://cdn.dribbble.com/userupload/22240193/file/original-530fda006c5ac8abfba6d3e7585a2da2.png" alt="" onerror="this.style.opacity='.05'">
+      <div class="pco"><div class="pci"><div class="pcc">Personal · Illustration</div><div class="pct">Character Illustration</div><div class="pcy">Ongoing</div></div></div>
+    </a>
+
+    <div id="empty"><div class="ei">◎</div><div class="et">No projects in this category</div></div>
+  </div>
+</section>
+
+<!-- bottom ticker -->
+<div class="tick">
+  <div class="tt3">
+    <div class="ti"><b>Behance</b><div class="ts"></div></div><div class="ti"><b>Dribbble</b><div class="ts"></div></div>
+    <div class="ti"><b>rockstr.net</b><div class="ts"></div></div><div class="ti"><b>@workbyshuks</b><div class="ts"></div></div>
+    <div class="ti"><b>@dodobidodo</b><div class="ts"></div></div><div class="ti"><b>Behance</b><div class="ts"></div></div>
+    <div class="ti"><b>Dribbble</b><div class="ts"></div></div><div class="ti"><b>rockstr.net</b><div class="ts"></div></div>
+    <div class="ti"><b>@workbyshuks</b><div class="ts"></div></div><div class="ti"><b>@dodobidodo</b><div class="ts"></div></div>
+  </div>
+</div>
+
+<footer>
+  <div><div class="fc2">© 2025 Shukri Maslan / rockstr</div><div class="ft">This page has ended, but the possibilities remain endless.</div></div>
+  <div class="fn">
+    <a href="/2026">Intro</a>
+    <a href="about.html">About</a>
+	<a href="marketing.html">Marketing</a>
+    <a href="https://be.net/shuks" target="_blank">Behance ↗</a>
+    <a href="https://dribbble.com/rockstr" target="_blank">Dribbble ↗</a>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ──────────────── */
+const CU=document.getElementById('cur'),CR=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  CU.style.left=mx+'px';CU.style.top=my+'px';
+  document.getElementById('spot').style.setProperty('--sx',mx+'px');
+  document.getElementById('spot').style.setProperty('--sy',my+'px');
+});
+document.addEventListener('mousedown',()=>document.body.classList.add('clk'));
+document.addEventListener('mouseup',()=>document.body.classList.remove('clk'));
+(function lr(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;CR.style.left=rx+'px';CR.style.top=ry+'px';requestAnimationFrame(lr);})();
+document.querySelectorAll('a,button,.pc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+/* ── THEME ───────────────── */
+const html=document.documentElement,tgt=document.getElementById('togt');
+function setTheme(t){html.setAttribute('data-theme',t);tgt.textContent=t==='dark'?'🌙':'🌞';try{localStorage.setItem('rs-t',t);}catch(e){}}
+try{const s=localStorage.getItem('rs-t');if(s)setTheme(s);}catch(e){}
+document.getElementById('tog').addEventListener('click',()=>setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+/* ── NAV ─────────────────── 
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>60));*/
+
+/* ── NAV SCROLL ───────────────────────────────────── */
+window.addEventListener('scroll', () =>
+  document.getElementById('nav').classList.toggle('sc', scrollY>60), {passive:true});
+
+/* ── BURGER / MOBILE MENU ─────────────────────────── */
+const burger  = document.getElementById('burger');
+const mob     = document.getElementById('mob');
+const mobClose= document.getElementById('mob-close');
+
+function toggleMenu(force) {
+  const open = force !== undefined ? force : !document.body.classList.contains('mopen');
+  document.body.classList.toggle('mopen', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+burger.addEventListener('click',   () => toggleMenu());
+/*mobClose.addEventListener('click', () => toggleMenu(false));*/
+// close when tapping any nav link (they navigate or scroll)
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape' && document.body.classList.contains('mopen')) toggleMenu(false);
+});
+
+/* ── SCROLL REVEAL ───────── */
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.06});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ── BG DOODLES REVEAL + SCROLL PARALLAX ─ */
+const bds=document.querySelectorAll('.bd');
+setTimeout(()=>bds.forEach(d=>d.classList.add('show')),400);
+
+window.addEventListener('scroll',()=>{
+  const sy=scrollY;
+  bds.forEach(d=>{
+    const depth=parseFloat(d.dataset.px)||.05;
+    const base=d.style.top||d.style.bottom;
+    d.style.transform=`translateY(${sy*depth}px)`;
+  });
+},{ passive:true });
+
+/* ── FILTER with FLIP animation ─────────── */
+const pills=document.querySelectorAll('.fp');
+const cards=document.querySelectorAll('.pc');
+const empty=document.getElementById('empty');
+const visCount=document.getElementById('vis-count');
+
+/* count per category */
+const cats=['uiux','creative','motion','illustration','social','award','latest'];
+cats.forEach(cat=>{
+  const el=document.getElementById('cnt-'+cat);
+  if(el) el.textContent=document.querySelectorAll(`.pc[data-cats*="${cat}"]`).length;
+});
+
+function runFilter(f){
+  /* 1. Record positions BEFORE */
+  const rects={};
+  cards.forEach(c=>{ rects[c]=c.getBoundingClientRect(); });
+
+  /* 2. Apply show/hide */
+  let visible=0;
+  cards.forEach(c=>{
+    const cats=c.dataset.cats||'';
+    const show=f==='all'||cats.split(' ').includes(f);
+    if(show){c.classList.remove('out');visible++;}
+    else c.classList.add('out');
+  });
+  empty.classList.toggle('show',visible===0);
+  visCount.textContent=visible+' project'+(visible===1?'':'s');
+
+  /* 3. Record positions AFTER and FLIP */
+  cards.forEach(c=>{
+    if(c.classList.contains('out')) return;
+    const newR=c.getBoundingClientRect();
+    const oldR=rects[c];
+    const dx=oldR.left-newR.left;
+    const dy=oldR.top-newR.top;
+    if(dx||dy){
+      c.style.transition='none';
+      c.style.transform=`translate(${dx}px,${dy}px)`;
+      requestAnimationFrame(()=>{
+        c.style.transition='transform .5s cubic-bezier(.16,1,.3,1)';
+        c.style.transform='';
+      });
+    }
+  });
+}
+
+pills.forEach(pill=>{
+  pill.addEventListener('click',()=>{
+    pills.forEach(p=>p.classList.remove('on'));
+    pill.classList.add('on');
+    runFilter(pill.dataset.f);
+  });
+});
+
+/* ── 3D TILT ─────────────── */
+cards.forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    if(c.classList.contains('out')) return;
+    const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`perspective(1000px) rotateY(${x*8}deg) rotateX(${-y*6}deg) scale(1.02)`;
+  });
+  c.addEventListener('mouseleave',()=>{ if(!c.classList.contains('out')) c.style.transform=''; });
+});
+
+/* TEXT SCRAMBLE on logo hover */
+const logo = document.getElementById('logo');
+const chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#✦*?&';
+
+const plainText = 'rockstr';
+const boldStart = 4; // index where <b> starts
+const boldEnd = 7;   // index where <b> ends (exclusive)
+
+let scr = false;
+
+logo.addEventListener('mouseenter', () => {
+  if (scr) return;
+  scr = true;
+
+  let i = 0;
+
+  const interval = setInterval(() => {
+    const result = plainText
+      .split('')
+      .map((_, j) => {
+        const char =
+          j < i
+            ? plainText[j]
+            : chars[Math.floor(Math.random() * chars.length)];
+
+        // wrap bold section
+        if (j >= boldStart && j < boldEnd) {
+          return `<b>${char}</b>`;
+        }
+        return char;
+      })
+      .join('');
+
+    logo.innerHTML = result;
+
+    if (i >= plainText.length) {
+      clearInterval(interval);
+      logo.innerHTML = 'rock<b>str</b>';
+      scr = false;
+    }
+
+    i += 0.5;
+  }, 46);
+});
+
+</script>
+</body>
+</html>

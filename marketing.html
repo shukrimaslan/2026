@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Case Studies — rockstr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────
+   TOKENS
+───────────────────────────────────── */
+:root {
+  --bg:       #faf8f4;
+  --bg2:      #f2ede3;
+  --bg3:      #eae3d6;
+  --surface:  #ffffff;
+  --ink:      #1a1410;
+  --ink2:     #574a38;
+  --ink3:     #9a8e7d;
+  --border:   rgba(26,20,16,.08);
+  --border-h: rgba(26,20,16,.18);
+  --shadow:   0 4px 20px rgba(26,20,16,.07);
+  --shadow-lg:0 24px 64px rgba(26,20,16,.14);
+  --accent:   #ff4d1c;
+  --a-bg:     rgba(255,77,28,.07);
+  --accent2:  #ffbe0b;
+  --accent3:  #06d6a0;
+  --accent4:  #a78bfa;
+  --accent5:  #fd0028;
+  --fd: 'Syne', sans-serif;
+  --fs: 'Space Grotesk', sans-serif;
+  --fm: 'DM Mono', monospace;
+  --sp:cubic-bezier(.16,1,.3,1);
+  --tt: background .5s var(--sp), color .4s, border-color .4s;
+}
+[data-theme="dark"] {
+  --bg:       #0d0b09;
+  --bg2:      #141210;
+  --bg3:      #1c1916;
+  --surface:  #1e1b17;
+  --ink:      #f5f0e8;
+  --ink2:     rgba(245,240,232,.62);
+  --ink3:     rgba(245,240,232,.32);
+  --border:   rgba(245,240,232,.07);
+  --border-h: rgba(245,240,232,.18);
+  --shadow:   0 4px 20px rgba(0,0,0,.3);
+  --shadow-lg:0 24px 64px rgba(0,0,0,.55);
+  --a-bg:     rgba(255,77,28,.1);
+}
+
+/* ─────────────────────────────────────
+   RESET + BASE
+───────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--ink);
+  font-family:var(--fs); overflow-x:hidden; cursor:none;
+  transition:var(--tt);
+}
+
+/* ─────────────────────────────────────
+   CURSOR
+───────────────────────────────────── */
+#cur, #cr {
+  position:fixed; pointer-events:none;
+  border-radius:50%; transform:translate(-50%,-50%);
+}
+#cur { width:10px; height:10px; background:var(--accent); z-index:9999;
+  transition:width .2s var(--sp), height .2s var(--sp), background .2s; }
+#cr  { width:36px; height:36px; border:1.5px solid var(--accent); z-index:9998;
+  opacity:.34; transition:width .38s var(--sp), height .38s var(--sp), opacity .2s, border-color .2s; }
+body.hov #cur { width:18px; height:18px; background:var(--accent2); }
+body.hov #cr  { width:60px; height:60px; opacity:.16; border-color:var(--accent2); }
+body.clk #cur { width:5px; height:5px; }
+
+/* ─────────────────────────────────────
+   SPOTLIGHT
+───────────────────────────────────── */
+#spot {
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:radial-gradient(circle 460px at var(--sx,50%) var(--sy,50%),rgba(255,77,28,.045) 0%,transparent 70%);
+}
+[data-theme="dark"] #spot {
+  background:radial-gradient(circle 460px at var(--sx,50%) var(--sy,50%),rgba(255,77,28,.08) 0%,transparent 70%);
+}
+
+/* ─────────────────────────────────────
+   THEME TOGGLE
+───────────────────────────────────── */
+#tog {
+  position:fixed; top:20px; right:20px; z-index:2001;
+  width:54px; height:28px; border-radius:100px;
+  background:var(--surface); border:1px solid var(--border-h);
+  display:flex; align-items:center; padding:3px; cursor:pointer;
+  box-shadow:var(--shadow); transition:background .4s, border-color .4s;
+}
+.tth {
+  width:20px; height:20px; border-radius:50%; background:var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; flex-shrink:0; transition:transform .4s var(--sp);
+}
+[data-theme="dark"] .tth { transform:translateX(25px); }
+
+/* ─────────────────────────────────────
+   PARALLAX DOODLES
+───────────────────────────────────── */
+#bgl { position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+.bd  { position:absolute; opacity:0; transition:opacity 1.4s var(--sp); }
+.bd.show { opacity:1; }
+.bd-st { animation:bsp 18s linear infinite; }
+.bd-zi { animation:bwb 6s ease-in-out infinite; }
+.bd-ci { animation:bpu 5s ease-in-out infinite; }
+.bd-pl { animation:bsp 24s linear infinite reverse; }
+.bd-wv { animation:bwb 7.5s ease-in-out infinite 1.2s; }
+.bd-dt { animation:bpu 9s ease-in-out infinite .5s; }
+.bd-ar { animation:bwb 10s ease-in-out infinite 2s; }
+.bd-tr { animation:bsp 28s linear infinite .8s; }
+.bd-sq { animation:bpu 7s ease-in-out infinite 1.6s; }
+@keyframes bsp { to { transform:rotate(360deg); } }
+@keyframes bwb { 0%,100%{transform:translateY(0) rotate(0deg)} 33%{transform:translateY(-11px) rotate(3deg)} 66%{transform:translateY(8px) rotate(-2deg)} }
+@keyframes bpu { 0%,100%{transform:scale(1)} 50%{transform:scale(1.24)} }
+
+/* ─────────────────────────────────────
+   NAV
+───────────────────────────────────── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:2000;
+  padding:20px 48px; display:flex; align-items:center; justify-content:space-between;
+  transition:background .4s, box-shadow .4s;
+}
+nav.sc {
+  background:rgba(250,248,244,.92); backdrop-filter:blur(20px);
+  box-shadow:0 1px 0 var(--border);
+}
+[data-theme="dark"] nav.sc { background:rgba(13,11,9,.92); }
+.nl { font-family:var(--fs); font-size:22px; font-weight:800; letter-spacing:-.04em; color:var(--ink); text-decoration:none; }
+.nl b { color:var(--accent); }
+.nv { display:flex; gap:34px; list-style:none; align-items:center; }
+.nv a { font-family:var(--fm); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink2); text-decoration:none; transition:color .2s; position:relative; }
+.nv a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1.5px; background:var(--accent); transition:width .35s var(--sp); }
+.nv a:hover { color:var(--ink); }
+.nv a:hover::after, .nv a.on::after { width:100%; }
+.nv a.on { color:var(--ink); }
+.ncta { background:var(--accent)!important; color:#fff!important; padding:8px 18px!important; border-radius:100px; }
+.ncta::after { display:none!important; }
+
+/* ─────────────────────────────────────────
+   MOBILE BURGER
+───────────────────────────────────────── */
+#burger {
+  display:none; flex-direction:column; justify-content:center; align-items:center;
+  width:40px; height:40px; gap:5px; background:none; border:none; cursor:pointer; z-index:2200; padding:4px;
+}
+.bl { display:block; width:22px; height:2px; border-radius:2px; background:var(--ink); transform-origin:center; transition:transform .4s var(--sp), opacity .3s, width .3s var(--sp); }
+body.mopen #burger .bl:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+body.mopen #burger .bl:nth-child(2) { opacity:0; width:0; }
+body.mopen #burger .bl:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* mobile menu overlay */
+#mob {
+  position:fixed; inset:0; z-index:2100;
+  background:var(--bg);
+  /* flex column: top-bar | scrollable content */
+  display:flex; flex-direction:column;
+  transform:translateX(100%);
+  padding: 25px 32px 48px;
+  transition:transform .55s var(--sp), background .5s;
+  overflow:hidden; /* clip the slide */
+}
+body.mopen #mob { transform:translateX(0); }
+/* accent top bar */
+#mob::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--accent); z-index:1; }
+#mob::after {
+  content:'leader'; position:absolute; right:-10px; bottom:-20px;
+  font-family:var(--fd); font-size:clamp(80px,20vw,160px); font-weight:800;
+  letter-spacing:-.06em; color:transparent;
+  -webkit-text-stroke:1.5px var(--border-h);
+  pointer-events:none; user-select:none; line-height:1;
+}
+	
+/* ── menu top bar: logo + close btn ── */
+.mob-topbar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 28px 0; flex-shrink:0; position:relative; z-index:2;
+}
+.mob-logo { font-family:var(--fs); font-size:22px; font-weight:800; letter-spacing:-.04em; color:var(--ink); text-decoration:none; }
+.mob-logo b { color:var(--accent); }
+	
+/* close button — replaces the animated burger X */
+.mob-close {
+  display:none; 
+}
+
+/* nav links */
+.mob-links { display:flex; flex-direction:column; gap:4px; flex:1; align-items: normal; }
+.mob-link {
+  font-family:var(--fd); font-size:clamp(28px,8vw,44px); font-weight:800; letter-spacing:-.04em;
+  color:var(--ink); text-decoration:none; padding:10px 0; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  opacity:0; transform:translateX(32px);
+  transition:opacity .48s var(--sp), transform .48s var(--sp), color .2s, padding-left .2s var(--sp);
+}
+body.mopen .mob-link { opacity:1; transform:translateX(0); }
+body.mopen .mob-link:nth-child(1) { transition-delay:.06s; margin-top: 45%; border-top:1px solid var(--border);}
+body.mopen .mob-link:nth-child(2) { transition-delay:.12s; }
+body.mopen .mob-link:nth-child(3) { transition-delay:.18s; }
+body.mopen .mob-link:nth-child(4) { transition-delay:.24s; }
+body.mopen .mob-link:nth-child(5) { transition-delay:.30s; }
+.mob-link:hover { color:var(--accent); padding-left:8px; }
+.mob-arrow { font-size:18px; opacity:.28; transition:opacity .2s, transform .2s var(--sp); }
+.mob-link:hover .mob-arrow { opacity:1; transform:translateX(4px); }
+
+/* social + availability — below links, never overlap */
+.mob-footer { margin-top:24px; position:relative; z-index:1; }
+.mob-social {
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; margin-bottom:16px;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .5s var(--sp) .34s, transform .5s var(--sp) .34s; z-index: 2002;
+}
+body.mopen .mob-social { opacity:1; transform:translateY(0); }
+.mob-sp {
+  font-family:var(--fm); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  padding:7px 13px; border-radius:100px; border:1px solid var(--border-h);
+  color:var(--ink2); text-decoration:none; transition:border-color .2s, color .2s;
+}
+.mob-sp:hover { border-color:var(--accent); color:var(--accent); }
+.mob-avail { font-family:var(--fm); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); margin-top:18px; display:flex; align-items:center; gap:7px; }
+.mob-avail-dot { width:7px; height:7px; border-radius:50%; background:var(--accent3); animation:pd 2s ease-in-out infinite; }
+
+/* ─────────────────────────────────────
+   SCROLL REVEAL
+───────────────────────────────────── */
+.rv { opacity:0; transform:translateY(32px); transition:opacity .85s var(--sp), transform .85s var(--sp); }
+.rv.in { opacity:1; transform:translateY(0); }
+.d1 { transition-delay:.12s; }
+.d2 { transition-delay:.24s; }
+.d3 { transition-delay:.36s; }
+.d4 { transition-delay:.48s; }
+
+/* ─────────────────────────────────────
+   HERO
+───────────────────────────────────── */
+#hero {
+  padding:200px 48px 100px; position:relative; z-index:10;
+  max-width:1400px; margin:0 auto;
+}
+.hero-label {
+  font-family:var(--fm); font-size:12px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:28px;
+}
+.hero-ttl {
+  font-family:var(--fs); font-size:clamp(44px,7.5vw,88px);
+  font-weight:800; line-height:1.08; letter-spacing:-.04em; margin-bottom:32px;
+}
+.hero-ttl b { color:var(--accent); }
+.hero-sub {
+  font-size:clamp(18px,2.2vw,24px); line-height:1.6; color:var(--ink2);
+  max-width:860px; margin-bottom:48px;
+}
+.hero-meta {
+  display:flex; flex-wrap:wrap; gap:20px; align-items:center;
+}
+.hero-stat {
+  font-family:var(--fm); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink3); display:flex; align-items:center; gap:8px;
+}
+.hero-stat::before {
+  content:''; width:6px; height:6px; border-radius:50%; background:var(--accent);
+}
+
+/* ─────────────────────────────────────
+   CASE STUDY CARD
+───────────────────────────────────── */
+#cases {
+  padding:80px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:10;
+}
+.cases-grid {
+  display:grid; gap:80px;
+}
+
+.case {
+  background:var(--surface); border:1px solid var(--border); border-radius:28px;
+  overflow:hidden; transition:transform .4s var(--sp), box-shadow .4s;
+}
+.case:hover {
+  transform:translateY(-8px); box-shadow:var(--shadow-lg);
+}
+
+.case-header {
+  padding:48px 48px 36px; border-bottom:1px solid var(--border);
+  position:relative;
+}
+.case-header::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:5px;
+  background:var(--case-color);
+}
+
+.case-num {
+  font-family:var(--fm); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--case-color); margin-bottom:20px;
+  display:inline-block; padding:6px 16px; background:var(--a-bg);
+  border-radius:20px; border:1px solid var(--case-color);
+}
+
+.case-title {
+  font-family:var(--fs); font-size:clamp(28px,4vw,42px);
+  font-weight:700; line-height:1.2; margin-bottom:20px;
+}
+
+.case-intro {
+  font-size:17px; line-height:1.65; color:var(--ink2);
+}
+
+.case-body {
+  padding:48px;
+}
+
+.case-section {
+  margin-bottom:44px;
+}
+.case-section:last-child { margin-bottom:0; }
+
+.case-label {
+  font-family:var(--fm); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--case-color); margin-bottom:14px;
+  font-weight:500;
+}
+
+.case-content {
+  font-size:16px; line-height:1.7; color:var(--ink);
+}
+
+.case-list {
+  list-style:none; display:grid; gap:12px;
+}
+.case-list li {
+  padding-left:24px; position:relative; font-size:15px; line-height:1.7; color:var(--ink2);
+}
+.case-list li::before {
+  content:''; position:absolute; left:0; top:10px;
+  width:8px; height:8px; border-radius:50%; background:var(--case-color);
+}
+
+.case-results {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:24px;
+  margin-top:24px;
+}
+.result-item {
+  background:var(--bg2); border:1px solid var(--border); border-radius:16px;
+  padding:24px; text-align:center; transition:transform .3s var(--sp), border-color .3s;
+}
+.result-item:hover {
+  transform:translateY(-4px); border-color:var(--case-color);
+}
+.result-icon {
+  font-size:28px; margin-bottom:12px;
+}
+.result-text {
+  font-size:14px; line-height:1.6; color:var(--ink2);
+}
+
+.case-role {
+  background:var(--bg2); border-left:4px solid var(--case-color);
+  padding:24px 28px; border-radius:12px; margin-top:32px;
+}
+.case-role-label {
+  font-family:var(--fm); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--case-color); margin-bottom:10px;
+  font-weight:500;
+}
+.case-role-text {
+  font-size:16px; line-height:1.6; color:var(--ink); font-weight:500;
+}
+
+/* Color assignments */
+.case:nth-child(1) { --case-color:var(--accent); }
+.case:nth-child(2) { --case-color:var(--accent2); }
+.case:nth-child(3) { --case-color:var(--accent3); }
+.case:nth-child(4) { --case-color:var(--accent4); }
+.case:nth-child(5) { --case-color:var(--accent5); }
+
+/* ─────────────────────────────────────
+   OVERVIEW SECTION
+───────────────────────────────────── */
+#overview {
+  padding:100px 48px; background:var(--bg2); position:relative; z-index:10;
+}
+.overview-wrap {
+  max-width:1400px; margin:0 auto;
+}
+.sec-label {
+  font-family:var(--fm); font-size:12px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:20px;
+}
+.sec-ttl {
+  font-family:var(--fs); font-size:clamp(36px,5vw,56px);
+  font-weight:700; line-height:1.2; margin-bottom:60px;
+}
+
+.overview-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:28px;
+}
+.overview-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:20px;
+  padding:36px 32px; position:relative; overflow:hidden;
+  transition:transform .4s var(--sp), border-color .4s, box-shadow .4s;
+}
+.overview-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background:var(--ov-color); transform:scaleX(0); transform-origin:left;
+  transition:transform .5s var(--sp);
+}
+.overview-card:hover::before { transform:scaleX(1); }
+.overview-card:hover {
+  transform:translateY(-6px); border-color:var(--ov-color);
+  box-shadow:var(--shadow-lg);
+}
+.overview-card:nth-child(1) { --ov-color:var(--accent); }
+.overview-card:nth-child(2) { --ov-color:var(--accent2); }
+.overview-card:nth-child(3) { --ov-color:var(--accent3); }
+.overview-card:nth-child(4) { --ov-color:var(--accent4); }
+.overview-card:nth-child(5) { --ov-color:var(--accent5); }
+
+.ov-icon {
+  font-size:40px; margin-bottom:20px;
+}
+.ov-ttl {
+  font-family:var(--fd); font-size:20px; font-weight:700;
+  margin-bottom:12px; line-height:1.3;
+}
+.ov-txt {
+  font-size:15px; line-height:1.7; color:var(--ink2);
+}
+
+/* ─────────────────────────────────────
+   CTA
+───────────────────────────────────── */
+#cta {
+  padding:140px 48px; text-align:center; max-width:900px; margin:0 auto;
+  position:relative; z-index:10;
+}
+.cta-ttl {
+  font-family:var(--fs); font-size:clamp(40px,6vw,68px);
+  font-weight:800; line-height:1.15; margin-bottom:28px;
+}
+.cta-ttl b { color:var(--accent); }
+.cta-sub {
+  font-size:clamp(17px,2vw,21px); line-height:1.65; color:var(--ink2);
+  margin-bottom:48px;
+}
+.cta-btns {
+  display:flex; gap:20px; justify-content:center; flex-wrap:wrap;
+}
+.btn {
+  font-family:var(--fs); font-size:15px; font-weight:500;
+  padding:16px 40px; border-radius:100px; text-decoration:none;
+  transition:all .4s var(--sp); display:inline-block; cursor:pointer;
+}
+.bp {
+  background:var(--accent); color:#fff; border:2px solid var(--accent);
+}
+.bp:hover {
+  background:transparent; color:var(--accent);
+  transform:translateY(-3px); box-shadow:var(--shadow-lg);
+}
+.bg {
+  background:transparent; color:var(--ink); border:2px solid var(--border-h);
+}
+.bg:hover {
+  border-color:var(--accent2); color:var(--accent2);
+  transform:translateY(-3px);
+}
+
+/* ── FOOTER ──────────────────────────────────── */
+footer {
+  padding:60px 48px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap:40px; flex-wrap:wrap; position:relative; z-index:10;
+}
+.fc {
+  font-family:var(--fm); font-size:12px; color:var(--ink3);
+  margin-bottom:8px;
+}
+.ft {
+  font-size:14px; color:var(--ink2); max-width:560px; line-height:1.6;
+}
+.fn {
+  display:flex; gap:28px; flex-wrap:wrap;
+}
+.fn a {
+  font-family:var(--fm); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink2); text-decoration:none;
+  transition:color .2s;
+}
+.fn a:hover { color:var(--accent); }
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────── */
+@media(max-width:1700px) {
+  .overview-grid {
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+}
+	
+@media(max-width:900px) {
+  .nav-links{display:none}
+  #burger{display:flex}
+  nav { padding:16px 20px; top: unset; position: inherit; }
+  #tog { right:72px; position: absolute; margin-top: 2px;}
+  .nv li:not(:last-child){display:none;}
+  #hero { padding:140px 28px 80px; }
+  #overview, #cases { padding:80px 28px; }
+  #cta { padding:100px 28px; }
+  footer { padding:48px 28px; }
+  
+  .case-header, .case-body { padding:32px 28px; }
+  .overview-grid { grid-template-columns:1fr; }
+  .case-results { grid-template-columns:1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cr"></div>
+
+<!-- SPOTLIGHT -->
+<div id="spot"></div>
+
+<!-- PARALLAX DOODLES -->
+<div id="bgl">
+  <svg class="bd bd-st" data-px=".08" style="top:8%;left:5%;width:80px;height:80px;" viewBox="0 0 100 100"><polygon points="50,15 90,85 10,85" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".18"/></svg>
+  <svg class="bd bd-zi" data-px=".12" style="top:18%;right:8%;width:60px;height:60px;" viewBox="0 0 100 100"><path d="M20,50 L80,20 L80,80 Z" fill="none" stroke="var(--accent2)" stroke-width="2" opacity=".2"/></svg>
+  <svg class="bd bd-ci" data-px=".06" style="top:32%;left:12%;width:70px;height:70px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="none" stroke="var(--accent3)" stroke-width="2" opacity=".16"/></svg>
+  <svg class="bd bd-pl" data-px=".1" style="top:48%;right:15%;width:90px;height:90px;" viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="none" stroke="var(--accent4)" stroke-width="2" opacity=".14"/></svg>
+  <svg class="bd bd-wv" data-px=".09" style="top:65%;left:18%;width:75px;height:75px;" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".2"/></svg>
+  <svg class="bd bd-dt" data-px=".07" style="top:78%;right:20%;width:65px;height:65px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="5" fill="var(--accent2)" opacity=".22"/><circle cx="50" cy="50" r="25" fill="none" stroke="var(--accent2)" stroke-width="2" opacity=".18"/></svg>
+  <svg class="bd bd-ar" data-px=".11" style="top:25%;right:25%;width:55px;height:55px;" viewBox="0 0 100 100"><path d="M50,10 L70,40 L50,35 L30,40 Z" fill="none" stroke="var(--accent3)" stroke-width="2" opacity=".2"/></svg>
+  <svg class="bd bd-tr" data-px=".08" style="top:55%;left:8%;width:85px;height:85px;" viewBox="0 0 100 100"><polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="var(--accent4)" stroke-width="2" opacity=".16"/></svg>
+  <svg class="bd bd-sq" data-px=".1" style="top:72%;right:10%;width:70px;height:70px;" viewBox="0 0 100 100"><rect x="25" y="25" width="50" height="50" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".18"/></svg>
+</div>
+
+<!-- ── NAV ──────────────────────────────────────── -->
+<nav id="nav">
+  <a href="/2026" class="nl" id="logo">rock<b>str</b></a>
+  <ul class="nv">
+    <li><a href="/2026">Intro</a></li>
+    <li><a href="works.html" class="on">Works</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="leadership.html">Leadership</a></li>
+    <li><a href="social.html">Social</a></li>
+    <li><a href="about.html#contact" class="ncta">Let's Talk</a></li>
+	<li><button id="tog" title="Toggle theme" aria-label="Toggle theme"><div class="tth" id="togt">🌞</div></button></li>
+  </ul>
+  <button id="burger" aria-label="Open menu">
+    <span class="bl"></span><span class="bl"></span><span class="bl"></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ────────────────────────────────────── -->
+<div id="mob">
+
+    <a href="index.html" class="mob-logo">rock<b>str</b></a>
+    <button id="mob-close" class="mob-close">
+    </button>
+  <nav class="mob-links">
+    <a href="/2026" class="mob-link">Intro <span class="mob-arrow">→</span></a>
+    <a href="works.html"     class="mob-link" style="color:var(--accent)">Works <span class="mob-arrow" style="opacity:.6">→</span></a>
+    <a href="about.html"     class="mob-link">About <span class="mob-arrow">→</span></a>
+    <a href="leadership.html" class="mob-link">Leadership <span class="mob-arrow">→</span></a>
+	<a href="social.html" class="mob-link">Social <span class="mob-arrow">→</span></a>
+    <a href="about.html#contact" class="mob-link" id="mob-talk">Let's Talk <span class="mob-arrow">→</span></a>
+  </nav>
+
+ <div class="mob-social">
+    <a href="https://www.tiktok.com/@dodobidodo" target="_blank" class="mob-sp">TikTok</a>
+    <a href="https://instagram.com/workbyshuks"  target="_blank" class="mob-sp">Instagram</a>
+    <a href="https://linkedin.com/in/shuks"      target="_blank" class="mob-sp">LinkedIn</a>
+    <a href="http://youtube.com/@littlel0ft"     target="_blank" class="mob-sp">YouTube</a>
+    <a href="https://be.net/shuks"               target="_blank" class="mob-sp">Behance</a>
+    <a href="https://dribbble.com/rockstr"       target="_blank" class="mob-sp">Dribbble</a>
+  </div>
+  <div class="mob-avail"><span class="mob-avail-dot"></span>Available for new projects</div>
+</div>
+<!-- ══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-label rv">Marketing Case Studies</div>
+  <h1 class="hero-ttl rv d1">Design Was the Start <br><b>Strategy </b>Is the Game</h1>
+  <p class="hero-sub rv d2">My background is in design, but my focus has evolved into leading ideas that perform. This is where I break down the thinking behind the work, the decisions, the direction, and the results that matter.</p>
+  <div class="hero-meta rv d3">
+    <div class="hero-stat">Astro Radio // Jump From Paper</div>
+    <div class="hero-stat">2019–2026</div>
+    <div class="hero-stat">From Visuals to Impact</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     OVERVIEW
+═══════════════════════════════════════ -->
+<section id="overview">
+  <div class="overview-wrap">
+    <div class="sec-label rv">Campaign Overview</div>
+    <h2 class="sec-ttl rv d1">Strategic Impact</h2>
+    
+    <div class="overview-grid">
+      <div class="overview-card rv d1">
+        <div class="ov-icon">📱</div>
+        <h3 class="ov-ttl">Platform Growth</h3>
+        <p class="ov-txt">Scaled presence from 20K to 500K+ views and engagements across Instagram and TikTok through story-driven, personality-led content.</p>
+      </div>
+      <div class="overview-card rv d2">
+        <div class="ov-icon">🎯</div>
+        <h3 class="ov-ttl">Content Direction</h3>
+        <p class="ov-txt">Led visual execution, platform strategy, and creative direction across all social campaigns and product launches.</p>
+      </div>
+      <div class="overview-card rv d3">
+        <div class="ov-icon">🚀</div>
+        <h3 class="ov-ttl">New Channel Launch</h3>
+        <p class="ov-txt">Established TikTok as a new acquisition channel, building audience traction on a platform the brand had never used before.</p>
+      </div>
+      <div class="overview-card rv d4">
+        <div class="ov-icon">🎨</div>
+        <h3 class="ov-ttl">Brand Consistency</h3>
+        <p class="ov-txt">Created unified creative system across multiple platforms, strengthening brand recognition and user experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CASE STUDIES
+═══════════════════════════════════════ -->
+<section id="cases">
+  <div class="cases-grid">
+    
+    <!-- CASE 1 -->
+    <article class="case rv">
+      <div class="case-header">
+        <span class="case-num">Case Study 01</span>
+        <h2 class="case-title">Scaling Social Engagement Through Content Strategy</h2>
+        <p class="case-intro">Transformed JumpFromPaper's social presence by shifting from static product posts to story-driven, personality-led content that highlights the brand's unique 2D illusion style.</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <div class="case-label">Objective</div>
+          <p class="case-content">Increase brand visibility and engagement across social platforms for Jump From Paper, targeting Gen Z and young millennials interested in playful, fashion-forward accessories.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Strategy</div>
+          <p class="case-content">Shift from static product posts to story-driven, personality-led content that highlights the brand's unique 2D illusion style.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Execution</div>
+          <ul class="case-list">
+            <li>Developed a consistent content direction across Instagram and TikTok</li>
+            <li>Introduced short-form video content focusing on styling, daily use, and visual illusions</li>
+            <li>Designed scroll-stopping creatives aligned with a vibrant, playful tone</li>
+            <li>Experimented with trending formats and platform-native storytelling</li>
+          </ul>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Results</div>
+          <div class="case-results">
+            <div class="result-item">
+              <div class="result-icon">📈</div>
+              <div class="result-text">Improved engagement rate across key posts</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">🔄</div>
+              <div class="result-text">Increased content shareability and saves</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">✨</div>
+              <div class="result-text">Strengthened brand identity consistency</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="case-role">
+          <div class="case-role-label">Your Role</div>
+          <div class="case-role-text">Led content direction, visual execution, and platform strategy</div>
+        </div>
+      </div>
+    </article>
+    
+    <!-- CASE 2 -->
+    <article class="case rv">
+      <div class="case-header">
+        <span class="case-num">Case Study 02</span>
+        <h2 class="case-title">Launching TikTok Presence for Brand Growth</h2>
+        <p class="case-intro">Established TikTok as a new acquisition and awareness channel by leveraging trend participation fused with brand identity, rather than purely promotional content.</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <div class="case-label">Objective</div>
+          <p class="case-content">Establish TikTok as a new acquisition and awareness channel, reaching TikTok-native users, trend-driven shoppers, and fashion enthusiasts.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Strategy</div>
+          <p class="case-content">Leverage trend participation + brand identity fusion instead of purely promotional content.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Execution</div>
+          <ul class="case-list">
+            <li>Created TikTok-first content formats (OOTD, transitions, product storytelling)</li>
+            <li>Adapted trending sounds and formats into brand-relevant content</li>
+            <li>Focused on authenticity over polished ads</li>
+            <li>Maintained consistent posting cadence</li>
+          </ul>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Results</div>
+          <div class="case-results">
+            <div class="result-item">
+              <div class="result-icon">🎯</div>
+              <div class="result-text">Built initial audience traction on new platform</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">🌍</div>
+              <div class="result-text">Increased reach beyond existing Instagram audience</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">💫</div>
+              <div class="result-text">Positioned brand as culturally relevant and trend-aware</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="case-role">
+          <div class="case-role-label">Your Role</div>
+          <div class="case-role-text">Planned content strategy, executed visuals, and guided platform direction</div>
+        </div>
+      </div>
+    </article>
+    
+    <!-- CASE 3 -->
+    <article class="case rv">
+      <div class="case-header">
+        <span class="case-num">Case Study 03</span>
+        <h2 class="case-title">Improving Product Appeal Through Visual Storytelling</h2>
+        <p class="case-intro">Enhanced product desirability and conversion by moving from isolated product displays to lifestyle integration, showing products in real-world scenarios.</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <div class="case-label">Objective</div>
+          <p class="case-content">Increase product desirability and conversion through better presentation for online shoppers evaluating products through social media and e-commerce.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Strategy</div>
+          <p class="case-content">Move from "product display" to lifestyle integration, showing how products fit into real scenarios.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Execution</div>
+          <ul class="case-list">
+            <li>Designed visuals showing products in use, not just isolated</li>
+            <li>Introduced storytelling elements (daily life, styling moments)</li>
+            <li>Ensured consistency across campaigns and product drops</li>
+          </ul>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Results</div>
+          <div class="case-results">
+            <div class="result-item">
+              <div class="result-icon">💎</div>
+              <div class="result-text">Improved perceived value of products</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">❤️</div>
+              <div class="result-text">Increased engagement on product-focused posts</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">🛍️</div>
+              <div class="result-text">Supported conversion by reducing hesitation</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="case-role">
+          <div class="case-role-label">Your Role</div>
+          <div class="case-role-text">Creative direction, visual execution, and content refinement</div>
+        </div>
+      </div>
+    </article>
+    
+    <!-- CASE 4 -->
+    <article class="case rv">
+      <div class="case-header">
+        <span class="case-num">Case Study 04</span>
+        <h2 class="case-title">Leading Creative Direction Across Multi-Platform Campaigns</h2>
+        <p class="case-intro">Created a unified creative system that ensures consistent brand communication across multiple platforms and campaigns, demonstrating leadership capabilities.</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <div class="case-label">Objective</div>
+          <p class="case-content">Ensure consistent brand communication across multiple platforms and campaigns through unified creative leadership.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Strategy</div>
+          <p class="case-content">Create a unified creative system that aligns messaging, visuals, and tone.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Execution</div>
+          <ul class="case-list">
+            <li>Defined visual direction and brand tone</li>
+            <li>Guided content across Instagram, TikTok, and other channels</li>
+            <li>Collaborated with team members to maintain consistency</li>
+          </ul>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Results</div>
+          <div class="case-results">
+            <div class="result-item">
+              <div class="result-icon">🎨</div>
+              <div class="result-text">Stronger brand recognition</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">✅</div>
+              <div class="result-text">More cohesive user experience across platforms</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">⚡</div>
+              <div class="result-text">Faster content production with clearer direction</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="case-role">
+          <div class="case-role-label">Your Role</div>
+          <div class="case-role-text">Creative leadership, decision-making, and team alignment</div>
+        </div>
+      </div>
+    </article>
+	  
+	<!-- CASE 5 -->
+    <article class="case rv">
+      <div class="case-header">
+        <span class="case-num">Case Study 05</span>
+        <h2 class="case-title">Expanding Digital Engagement Through Content Ecosystem</h2>
+        <p class="case-intro">Increased brand visibility, strengthen the digital presence and engagement. Shifted to content-driven approach aligned with audience behavior.</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <div class="case-label">Objective</div>
+          <p class="case-content">Increase audience engagement and strengthen digital presence across SYOK’s content ecosystem, while making content more discoverable and platform-friendly.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Strategy</div>
+          <p class="case-content">Shift from traditional broadcast-style promotion to a digital-first content ecosystem, where content is snackable, shareable and platform-native. Focus on turning SYOK from just a listening platform into a content-driven entertainment hub.</p>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Execution</div>
+          <ul class="case-list">
+            <li>Translated radio and long-form content into short-form, social-friendly formats</li>
+            <li>Designed engaging visuals and motion content tailored for Instagram and digital platforms</li>
+			<li>Introduced content formats such as highlight clips, personality-driven content (DJs, hosts) and entertainment snippets optimised for scrolling behaviour</li>
+            <li>Ensured consistent visual identity across different shows and segments</li>
+            <li>Supported content rollout strategies to maintain frequency and relevance</li>
+          </ul>
+        </div>
+        
+        <div class="case-section">
+          <div class="case-label">Results</div>
+          <div class="case-results">
+            <div class="result-item">
+              <div class="result-icon">📈</div>
+              <div class="result-text">Increased engagement on digital content across platforms</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">🛠️</div>
+              <div class="result-text">Improved content discoverability beyond traditional listeners</div>
+            </div>
+            <div class="result-item">
+              <div class="result-icon">🥇</div>
+              <div class="result-text">Strengthened SYOK’s positioning as a modern, digital-first entertainment platform</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="case-role">
+          <div class="case-role-label">Your Role</div>
+          <div class="case-role-text">Contributed to shaping a more platform-native content direction, led creative execution and content adaptation for digital platforms</div>
+        </div>
+      </div>
+    </article>
+    
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA
+═══════════════════════════════════════ -->
+<section id="cta">
+  <h2 class="cta-ttl rv">Ready to see more <b>work?</b></h2>
+  <p class="cta-sub rv d1">Explore the full portfolio to see how strategic thinking meets creative execution across digital design, UI/UX, motion, and social media.</p>
+  <div class="cta-btns rv d2">
+    <a href="works.html" class="btn bp">View All Projects ↗</a>
+    <a href="about.html#contact" class="btn bg">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────── -->
+<footer>
+  <div>
+    <div class="fc">© 2025 Shukri Maslan / rockstr</div>
+    <div class="ft">This page has ended, but the possibilities remain endless.</div>
+  </div>
+  <div class="fn">
+    <a href="index.html">Intro</a>
+    <a href="works.html">Works</a>
+    <a href="about.html">About</a>
+    <a href="about.html#contact">Contact ↗</a>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ──────────────────────────── */
+const CU=document.getElementById('cur'), CR=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  CU.style.left=mx+'px'; CU.style.top=my+'px';
+  document.getElementById('spot').style.setProperty('--sx',mx+'px');
+  document.getElementById('spot').style.setProperty('--sy',my+'px');
+});
+document.addEventListener('mousedown',()=>document.body.classList.add('clk'));
+document.addEventListener('mouseup',  ()=>document.body.classList.remove('clk'));
+(function lr(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;CR.style.left=rx+'px';CR.style.top=ry+'px';requestAnimationFrame(lr);})();
+document.querySelectorAll('a,button,.case,.overview-card,.result-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+/* ── THEME ───────────────────────────── */
+const html=document.documentElement, tgt=document.getElementById('togt');
+function setTheme(t){
+  html.setAttribute('data-theme',t);
+  tgt.textContent=t==='dark'?'🌙':'🌞';
+  try{localStorage.setItem('rs-t',t);}catch(e){}
+}
+try{const s=localStorage.getItem('rs-t');if(s)setTheme(s);}catch(e){}
+document.getElementById('tog').addEventListener('click',()=>setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+/* ── NAV SCROLL ───────────────────────────────────── */
+window.addEventListener('scroll', () =>
+  document.getElementById('nav').classList.toggle('sc', scrollY>60), {passive:true});
+
+/* ── BURGER / MOBILE MENU ─────────────────────────── */
+const burger  = document.getElementById('burger');
+const mob     = document.getElementById('mob');
+const mobClose= document.getElementById('mob-close');
+
+function toggleMenu(force) {
+  const open = force !== undefined ? force : !document.body.classList.contains('mopen');
+  document.body.classList.toggle('mopen', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+burger.addEventListener('click',   () => toggleMenu());
+mobClose.addEventListener('click', () => toggleMenu(false));
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape' && document.body.classList.contains('mopen')) toggleMenu(false);
+});
+
+/* ── BG DOODLES — reveal + scroll parallax ── */
+const bds=document.querySelectorAll('.bd');
+setTimeout(()=>bds.forEach(d=>d.classList.add('show')),500);
+window.addEventListener('scroll',()=>{
+  const sy=scrollY;
+  bds.forEach(d=>{d.style.transform=`translateY(${sy*(parseFloat(d.dataset.px)||.05)}px)`;});
+},{passive:true});
+
+/* TEXT SCRAMBLE on logo hover */
+const logo = document.getElementById('logo');
+const chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#✦*?&';
+const plainText = 'rockstr';
+const boldStart = 4;
+const boldEnd = 7;
+let scr = false;
+
+logo.addEventListener('mouseenter', () => {
+  if (scr) return;
+  scr = true;
+  let i = 0;
+  const interval = setInterval(() => {
+    const result = plainText
+      .split('')
+      .map((_, j) => {
+        const char = j < i ? plainText[j] : chars[Math.floor(Math.random() * chars.length)];
+        if (j >= boldStart && j < boldEnd) return `<b>${char}</b>`;
+        return char;
+      })
+      .join('');
+    logo.innerHTML = result;
+    if (i >= plainText.length) {
+      clearInterval(interval);
+      logo.innerHTML = 'rock<b>str</b>';
+      scr = false;
+    }
+    i += 0.5;
+  }, 46);
+});
+
+/* ── SCROLL REVEAL ───────────────────── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
